@@ -274,7 +274,7 @@ if __name__ == "__main__":
         "base_channels": 32,
         "num_res_blocks": 6,
         "num_res_blocks_lidar": 1,
-        "channel_snr_db_range": (0, 20), # SNR range in dB for training
+        "channel_snr_db_range": (-5, 20), # SNR range in dB for training
         "compression_ratio": 8,
         "learning_rate": 1e-4,
         "batch_size": 64,

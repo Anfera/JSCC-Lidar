@@ -2,7 +2,7 @@
 
 Reference implementation for the IEEE paper *"Joint Source–Channel Coding for
 Diffusion-Based LiDAR Denoising and Super-Resolution Over Noisy Channels"*
-(Ramirez-Jaime *et al.*; manuscript: [`bare_jrnl.tex`](bare_jrnl.tex)).
+(Ramirez-Jaime *et al.*).
 
 A 3-D convolutional JSCC autoencoder is trained against the **expected clean
 photon-count tensor** Λ (the surrogate target), transmitted over a simulated
@@ -16,7 +16,6 @@ super-resolution of HyperHeight Data Cubes (HHDCs).
 
 ```
 FullPackage/
-├── bare_jrnl.tex              # the paper manuscript (LaTeX, IEEEtran)
 ├── README.md                  # this file
 ├── requirements.txt           # Python dependencies
 ├── .gitignore                 # generated/large-artifact exclusions
@@ -32,7 +31,6 @@ FullPackage/
 ├── inferencia.py              # WORKFLOW 2b: single DPS reconstruction + metrics
 ├── jscc_sweep.py              # WORKFLOW 3: full CSNR × runs sweep
 ├── find_lr_multiplier.py      # utility: grid-search the DPS guidance weight
-├── lr_search_results.csv      # committed output of find_lr_multiplier.py
 │
 ├── prior/                     # diffusion prior weights  (NOT in VCS — see below)
 │   └── model2.pt
@@ -161,16 +159,13 @@ metrics.json}`. The sweep is **resumable** — completed `(CR, CSNR, run)` cells
 
 ## Known config notes
 
-- **Channel-SNR range drift.** `train_autoencoder.py` and `jscc_sweep.py` use
-  `channel_snr_db_range = (-5, 20)` (and `jscc_sweep.py` sweeps
-  `CSNR ∈ [-5, 20]`), whereas `run_autoencoder.py` / `inferencia.py` use
-  `(0, 20)` and the paper reports training/evaluation over **0–20 dB**. The
-  *shipped* `autoencoder_lambda/` checkpoints were trained with `(-5, 20)`; the
-  extra negative-SNR span only affects training-time SNR sampling and the
-  FiLM conditioning, not the architecture or checkpoint loading. The range is
-  left as-is so the provided weights are not misrepresented. To match the paper
-  exactly, retrain with `channel_snr_db_range = (0, 20)` and restrict the
-  sweep to `CSNR_RANGE = range(0, 21)`.
+- **Channel-SNR range.** All scripts use `channel_snr_db_range = (-5, 20)`
+  (`train_autoencoder.py`, `jscc_sweep.py`, `run_autoencoder.py`,
+  `autoencoder.py`) and `jscc_sweep.py` sweeps `CSNR_RANGE = range(-5, 21)`.
+  This matches the bundled `autoencoder_lambda/` checkpoints (trained over
+  −5–20 dB). The paper reports the 0–20 dB sub-range; the extra negative span
+  only widens training-time SNR sampling / FiLM conditioning and does not
+  affect the architecture or checkpoint loading.
 - **`forward_model.py` demo block.** Running `python forward_model.py`
   directly executes a `__main__` self-test that loads a non-shipped
   `TestCube/hhdc_casals_resampled.npy`; it is unused by the three workflows.

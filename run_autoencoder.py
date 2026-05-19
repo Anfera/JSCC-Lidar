@@ -16,7 +16,7 @@ CONFIG = {
     "base_channels": 32,
     "num_res_blocks": 6,
     "num_res_blocks_lidar": 1,
-    "channel_snr_db_range": (0, 20),
+    "channel_snr_db_range": (-5, 20),
     "compression_ratio": 8,
     "learning_rate": 1e-4,
     "batch_size": 64,
