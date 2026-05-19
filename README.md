@@ -1,5 +1,8 @@
 # Joint Source–Channel Coding for Diffusion-Based LiDAR Denoising and Super-Resolution Over Noisy Channels
 
+![Approach](images/JSCCDiagram.png)
+
+
 Reference implementation for the IEEE paper *"Joint Source–Channel Coding for
 Diffusion-Based LiDAR Denoising and Super-Resolution Over Noisy Channels"*
 (Ramirez-Jaime *et al.*).
