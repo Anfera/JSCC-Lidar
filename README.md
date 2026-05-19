@@ -177,17 +177,3 @@ metrics.json}`. The sweep is **resumable** — completed `(CR, CSNR, run)` cells
   Import `LidarForwardImagingModel` from it instead of executing the file.
 
 ---
-
-## Building the paper
-
-```bash
-pdflatex bare_jrnl.tex
-bibtex   bare_jrnl
-pdflatex bare_jrnl.tex
-pdflatex bare_jrnl.tex
-```
-
-> **Note:** `bare_jrnl.tex` ends with `\bibliography{refs}`, but `refs.bib` is
-> **not present** in this package. Add the `refs.bib` bibliography file (and the
-> `figures/` directory referenced by the `\includegraphics` calls) before
-> compiling, or the build will fail / produce undefined citations.
