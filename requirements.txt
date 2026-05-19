@@ -1,0 +1,39 @@
+# Python 3.9 (the author's environment is a conda env; see .vscode/settings.json).
+#
+# Install with:
+#   pip install -r requirements.txt
+#
+# PyTorch: install the build that matches your CUDA toolkit first, e.g.
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+# then run the line above for the rest.
+
+torch
+torchvision
+numpy
+matplotlib
+tqdm
+datasets
+accelerate
+lpips
+scikit-image
+einops
+ema-pytorch
+packaging
+pillow
+pytorch-fid
+
+# ----------------------------------------------------------------------------
+# Dependency map (where each is used):
+#   torch, torchvision      - all models, channel sim, diffusion U-Net
+#   numpy, matplotlib       - data handling and figures
+#   tqdm                    - progress bars
+#   datasets                - HuggingFace dataset `anfera236/HHDC`
+#                             (precompute_lambda.py, inferencia.py)
+#   accelerate              - mixed-precision training loop (train_autoencoder.py)
+#   lpips                   - LPIPS metric (inferencia.py, jscc_sweep.py,
+#                             find_lr_multiplier.py)
+#   scikit-image            - SSIM / PSNR metrics
+#   einops, ema-pytorch,    - required by the bundled denoising_diffusion_pytorch
+#   packaging, pillow,        package (diffusion prior / Trainer)
+#   pytorch-fid
+# ----------------------------------------------------------------------------
