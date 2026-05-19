@@ -159,19 +159,3 @@ metrics.json}`. The sweep is **resumable** — completed `(CR, CSNR, run)` cells
 (those with a `metrics.json`) are skipped on rerun.
 
 ---
-
-## Known config notes
-
-- **Channel-SNR range.** All scripts use `channel_snr_db_range = (-5, 20)`
-  (`train_autoencoder.py`, `jscc_sweep.py`, `run_autoencoder.py`,
-  `autoencoder.py`) and `jscc_sweep.py` sweeps `CSNR_RANGE = range(-5, 21)`.
-  This matches the bundled `autoencoder_lambda/` checkpoints (trained over
-  −5–20 dB). The paper reports the 0–20 dB sub-range; the extra negative span
-  only widens training-time SNR sampling / FiLM conditioning and does not
-  affect the architecture or checkpoint loading.
-- **`forward_model.py` demo block.** Running `python forward_model.py`
-  directly executes a `__main__` self-test that loads a non-shipped
-  `TestCube/hhdc_casals_resampled.npy`; it is unused by the three workflows.
-  Import `LidarForwardImagingModel` from it instead of executing the file.
-
----
